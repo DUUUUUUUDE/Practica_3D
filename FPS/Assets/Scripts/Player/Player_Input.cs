@@ -27,23 +27,32 @@ public class Player_Input : MonoBehaviour {
             Application.Quit();
 
         #region GUN
-        if (Input.GetButton("Fire1"))
-        {
-            Player_Controller.m_Gun.Shootig();
-        }
-        if (Input.GetButtonUp("Fire1"))
-        {
-            Player_Controller.m_Gun.ResetWeapon();
-        }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Player_Controller.CombatState != Player_Controller.CombatStates.Reloading)
         {
-            Player_Controller.m_Gun.AimGun();
+            if (Input.GetButton("Fire1"))
+            {
+                Player_Controller.m_Gun.Shootig();
+            }
+            if (Input.GetButtonUp("Fire1"))
+            {
+                Player_Controller.m_Gun.ResetWeapon();
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                Player_Controller.m_Gun.AimGun();
+            }
+            if (Input.GetKeyUp(KeyCode.Mouse1))
+            {
+                Player_Controller.m_Gun.AimGun();
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Player_Controller.CombatState = Player_Controller.CombatStates.Reloading;
+                Player_Controller.m_Gun.ReloadWeapon();
+            }
         }
-        if (Input.GetKeyUp(KeyCode.Mouse1))
-        {
-            Player_Controller.m_Gun.AimGun();
-        }
+        
         #endregion
 
         #region MOVEMENT

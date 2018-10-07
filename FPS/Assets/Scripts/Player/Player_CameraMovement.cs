@@ -29,6 +29,9 @@ public class Player_CameraMovement : MonoBehaviour {
         RotationalSpeedModifier *= Player_Controller.m_Input.Sensibility;
         YawRotationalSpeed = RotationalSpeedModifier;
         PitchRotationalSpeed = RotationalSpeedModifier / 2;
+
+        //recoil
+        SetOldPitch();
     }
     // GET MOUSE AXIS
     void GetMouseAxis ()
@@ -40,19 +43,34 @@ public class Player_CameraMovement : MonoBehaviour {
     void MoveCamera ()
     {
         Pitch += MouseAxis.y * PitchRotationalSpeed * Time.deltaTime;
+
         Yawn += MouseAxis.x * YawRotationalSpeed * Time.deltaTime;
+
+        if (totalRecoil > 0)
+        {
+            totalRecoil = Mathf.Lerp(totalRecoil, 0, t);
+            t += Time.deltaTime;
+        }
 
         Pitch = Mathf.Clamp(Pitch, m_MinPitch, m_MaxPitch);
 
         transform.rotation = Quaternion.Euler(0.0f, Yawn, 0.0f);
-        PitchControllerTransform.localRotation = Quaternion.Euler(Pitch, 0.0f, 0.0f);
+        PitchControllerTransform.localRotation = Quaternion.Euler(Pitch - totalRecoil, 0.0f, 0.0f);
+
+        
     }
 
+    //RecoilStuff
+    float totalRecoil;
+    float t;
+    public void SetOldPitch()
+    {
+    }
     public void CameraRecoil (float angle)
     {
-
-        Pitch -= angle;
-
+        totalRecoil += angle;
+        totalRecoil = Mathf.Clamp(totalRecoil, 0, 15);
+        t = 0;
     }
 
 

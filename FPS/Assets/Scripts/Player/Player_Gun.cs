@@ -36,24 +36,27 @@ public class Player_Gun : MonoBehaviour {
 
 
     Coroutine AimCO = null;
-    bool Aiming;
 
     public void AimGun ()
     {
         if (AimCO != null) 
             StopCoroutine(AimCO); 
-        if (!Aiming)
+        if (Player_Controller.MovingState != Player_Controller.MovingStates.Aiming)
         {
             AimCO = StartCoroutine (Aim());
-            Aiming = true;
+            GunStats.Aim();
+            Player_Controller.MovingState = Player_Controller.MovingStates.Aiming;
             ActiveGun.transform.localEulerAngles = GunStats.AimRot;
         }
         else
         {
             AimCO = StartCoroutine(DeAim());
-            Aiming = false;
+            GunStats.Aim();
+            Player_Controller.MovingState = Player_Controller.MovingStates.Walking;
             ActiveGun.transform.localEulerAngles = GunStats.HipRot;
         }
+        recoil = GunStats.MaxRecoil;
+
     }
 
     public void GetNewWeapon (GameObject newGun)
@@ -62,7 +65,11 @@ public class Player_Gun : MonoBehaviour {
         ActiveGun = newGun;
         ActiveGun.SetActive(true);
         GunStats = newGun.GetComponentInChildren<GunStats>();
-        Aiming = false;
+        if (Player_Controller.MovingState == Player_Controller.MovingStates.Aiming)
+        {
+            Player_Controller.MovingState = Player_Controller.MovingStates.Walking;
+        }
+
     }
 
     IEnumerator Aim ()
@@ -85,8 +92,17 @@ public class Player_Gun : MonoBehaviour {
 
     #region SHOOTING
 
+    bool firstShoot = true;
     public void Shootig ()
     {
+
+        if (firstShoot)
+            Player_Controller.m_CameraMovement.SetOldPitch();
+
+        if (recoil > 0 && GunStats.Ammo > 0)
+        {
+            Player_Controller.m_CameraMovement.CameraRecoil(recoil);
+        }
 
         timeToShoot += Time.deltaTime;
         if (timeToShoot > secondsPerBullet)
@@ -107,14 +123,6 @@ public class Player_Gun : MonoBehaviour {
             timeToShoot = 0;
 
         }
-
-        if (recoil > 0)
-        {
-            recoil -= GunStats.SpreadMod * Time.deltaTime;
-            Player_Controller.m_CameraMovement.CameraRecoil(recoil);
-        }
-
-
     }
 
     public void ResetWeapon ()
@@ -122,6 +130,12 @@ public class Player_Gun : MonoBehaviour {
         spread = 0;
         recoil = GunStats.MaxRecoil;
         timeToShoot = secondsPerBullet;
+        firstShoot = true;
+    }
+
+    public void ReloadWeapon ()
+    {
+        GunStats.Reload();
     }
 
     #endregion
@@ -158,17 +172,22 @@ public class Player_Gun : MonoBehaviour {
     // ADD BULLET
     void AddBullet ()
     {
-        Bullet newBullet = new Bullet ();
-        newBullet.Pos = Player_Controller.MainCamera.transform.position;
-        newBullet.Direction = Player_Controller.MainCamera.transform.forward;
+        if (GunStats.Ammo > 0)
+        {
+            Bullet newBullet = new Bullet();
+            newBullet.Pos = Player_Controller.MainCamera.transform.position;
+            newBullet.Direction = Player_Controller.MainCamera.transform.forward;
 
-        Vector3 RandomDirection = Random.insideUnitSphere * spread;
+            Vector3 RandomDirection = Random.insideUnitSphere * spread;
 
-        newBullet.Direction = Quaternion.Euler (RandomDirection) * Player_Controller.MainCamera.transform.forward;
+            newBullet.Direction = Quaternion.Euler(RandomDirection) * Player_Controller.MainCamera.transform.forward;
 
-        Bullets.Add(newBullet);
+            Bullets.Add(newBullet);
 
-        GunStats.PlayRecoil();
+            //Gun Stuff
+            GunStats.PlayRecoil();
+            GunStats.Shoot();
+        }
     }
 
     // REMOVE BULLET
