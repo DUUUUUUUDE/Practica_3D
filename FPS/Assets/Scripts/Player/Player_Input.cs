@@ -26,8 +26,7 @@ public class Player_Input : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
 
-        #region MOVEMENT
-
+        #region GUN
         if (Input.GetButton("Fire1"))
         {
             Player_Controller.m_Gun.Shootig();
@@ -35,9 +34,19 @@ public class Player_Input : MonoBehaviour {
         if (Input.GetButtonUp("Fire1"))
         {
             Player_Controller.m_Gun.ResetWeapon();
-
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            Player_Controller.m_Gun.AimGun();
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            Player_Controller.m_Gun.AimGun();
+        }
+        #endregion
+
+        #region MOVEMENT
         Player_Controller.m_Movement.SetMoveDirection(GetMovementAxis ());
 
         // JUMP START
