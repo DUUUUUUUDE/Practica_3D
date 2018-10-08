@@ -161,7 +161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &14527339
 Transform:
   m_ObjectHideFlags: 0
@@ -9621,7 +9621,7 @@ MonoBehaviour:
   _ChangeDirGround: 0
   _NormalMoveSpeed: 8
   _RunMoveSpeed: 15
-  _MouseSensitivity: 0
+  _CrouchMoveSpeed: 5
   CanJump: 0
   Jump: 0
   _MoveSpeed: 0
@@ -9713,12 +9713,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bb353d7d0058d408e15b5c7279bf77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ball: {fileID: 1823444088}
   CollisionLayer:
     serializedVersion: 2
     m_Bits: 823
-  ActiveGun: {fileID: 14527338}
-  GunStats: {fileID: 14527341}
+  PrimaryWeapon: {fileID: 14527338}
+  SecondaryWeapon: {fileID: 1811987359}
+  ActiveGun: {fileID: 0}
+  GunStats: {fileID: 0}
   aimSpeed: 15
 --- !u!114 &532363133
 MonoBehaviour:

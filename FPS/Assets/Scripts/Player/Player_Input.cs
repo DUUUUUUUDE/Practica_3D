@@ -47,13 +47,22 @@ public class Player_Input : MonoBehaviour {
             {
                 Player_Controller.m_Gun.ResetWeapon();
             }
+            //AIM
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                Player_Controller.m_Gun.AimGun();
+                Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Aiming);
             }
+            //PUT GUN DOWN
             if (Input.GetKeyUp(KeyCode.Mouse1))
             {
-                Player_Controller.m_Gun.AimGun();
+                if (GetComponent<CharacterController>().height > 1)
+                {
+                    Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Walking);
+                }
+                else
+                {
+                    Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Crouching);
+                }
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -96,14 +105,22 @@ public class Player_Input : MonoBehaviour {
         //RUN START
         if (Input.GetButtonDown("Fire3"))
         {
-            Player_Controller.m_Movement.Run();
+            Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Running);
         }
         //RUN END
         if (Input.GetButtonUp("Fire3"))
         {
-            Player_Controller.m_Movement.Walk();
+            Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Walking);
         }
-
+        //CROUCH START
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Crouching);
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Walking);
+        }
         #endregion
     }
 }

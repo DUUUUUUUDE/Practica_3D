@@ -22,8 +22,6 @@ public class Player_Gun : MonoBehaviour {
 
     private void Start()
     {
-       //GetNewWeapon(PrimaryWeapon);
-       //ResetWeapon();
     }
 
     private void Update()
@@ -32,76 +30,76 @@ public class Player_Gun : MonoBehaviour {
         CheckColisions();
     }
 
-    float timeToShoot;
-    float acumulatedTime;
 
-
-    Coroutine AimCO = null;
-
-    public void AimGun ()
+    public void GetNewWeapon(GameObject newGun)
     {
-        if (AimCO != null) 
-            StopCoroutine(AimCO); 
-        if (Player_Controller.MovingState != Player_Controller.MovingStates.Aiming)
+        if (Player_Controller.MovingState == Player_Controller.MovingStates.Aiming)
         {
-            AimCO = StartCoroutine (Aim());
-            GunStats.Aim();
-            Player_Controller.MovingState = Player_Controller.MovingStates.Aiming;
-            ActiveGun.transform.localEulerAngles = GunStats.AimRot;
+            Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Walking);
         }
-        else
-        {
-            AimCO = StartCoroutine(DeAim());
-            GunStats.Aim();
-            Player_Controller.MovingState = Player_Controller.MovingStates.Walking;
-            ActiveGun.transform.localEulerAngles = GunStats.HipRot;
-        }
-        recoil = GunStats.MaxRecoil;
 
-    }
-
-    public void GetNewWeapon (GameObject newGun)
-    {
         if (ActiveGun)
             ActiveGun.SetActive(false);
         ActiveGun = newGun;
         ActiveGun.SetActive(true);
         GunStats = newGun.GetComponentInChildren<GunStats>();
         secondsPerBullet = 60 / GunStats.FireRate;
-        if (Player_Controller.MovingState == Player_Controller.MovingStates.Aiming)
-        {
-            Player_Controller.MovingState = Player_Controller.MovingStates.Walking;
-        }
-
     }
 
-    IEnumerator Aim ()
+    #region AIM
+    Coroutine AimCO = null;
+
+    public void AimGun()
     {
-        while  (ActiveGun.transform.localPosition != GunStats.AimPos)
+        if (AimCO != null)
+            StopCoroutine(AimCO);
+
+        AimCO = StartCoroutine(Aim(ActiveGun));
+        GunStats.Aim();
+        ActiveGun.transform.localEulerAngles = GunStats.AimRot;
+
+        recoil = GunStats.MaxRecoil;
+    }
+
+    public void PutGunDown ()
+    {
+        if (AimCO != null)
+            StopCoroutine(AimCO);
+
+        AimCO = StartCoroutine(DeAim(ActiveGun));
+        GunStats.PutGunDown();
+        ActiveGun.transform.localEulerAngles = GunStats.HipRot;
+
+        recoil = GunStats.MaxRecoil;
+    }
+
+    IEnumerator Aim (GameObject target)
+    {
+        while  (target.transform.localPosition != target.GetComponent<GunStats>().AimPos)
         {
-            ActiveGun.transform.localPosition = Vector3.MoveTowards(ActiveGun.transform.localPosition, GunStats.AimPos, aimSpeed * Time.deltaTime);
+            target.transform.localPosition = Vector3.MoveTowards(target.transform.localPosition, target.GetComponent<GunStats>().AimPos, aimSpeed * Time.deltaTime);
             yield return null;
         }
     }
 
-    IEnumerator DeAim()
+    IEnumerator DeAim(GameObject target)
     {
-        while (ActiveGun.transform.localPosition != GunStats.HipPos)
+        while (target.transform.localPosition != target.GetComponent<GunStats>().HipPos)
         {
-            ActiveGun.transform.localPosition = Vector3.MoveTowards(ActiveGun.transform.localPosition, GunStats.HipPos, aimSpeed * Time.deltaTime);
+            target.transform.localPosition = Vector3.MoveTowards(target.transform.localPosition, target.GetComponent<GunStats>().HipPos, aimSpeed * Time.deltaTime);
             yield return null;
         }
     }
+    #endregion
 
     #region SHOOTING
 
+
+    float timeToShoot;
+    float acumulatedTime;
     bool firstShoot = true;
     public void Shootig ()
     {
-
-        if (firstShoot)
-            Player_Controller.m_CameraMovement.SetOldPitch();
-
         if (recoil > 0 && GunStats.MagAmmo > 0)
         {
             Player_Controller.m_CameraMovement.CameraRecoil(recoil);

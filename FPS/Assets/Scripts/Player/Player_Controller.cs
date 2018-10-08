@@ -35,19 +35,39 @@ public class Player_Controller : MonoBehaviour {
     {
         if (newState != MovingState)
         {
+            switch (MovingState)
+            {
+                case (MovingStates.Aiming):
+                    m_Gun.PutGunDown();
+                    break;
+                case (MovingStates.Walking):
+                    break;
+                case (MovingStates.Running):
+                    break;
+                case (MovingStates.Crouching):
+                    break;
+            }
+
+
             switch (newState)
             {
                 case (MovingStates.Aiming):
+                    MovingState = MovingStates.Aiming;
+                    m_Gun.AimGun();
                     break;
                 case (MovingStates.Walking):
                     MovingState = MovingStates.Walking;
-                    //
+                    m_Movement.StandUp();
+                    m_Movement.Walk();
                     break;
                 case (MovingStates.Running):
                     MovingState = MovingStates.Running;
-                    //
+                    m_Movement.StandUp();
+                    m_Movement.Run();
                     break;
                 case (MovingStates.Crouching):
+                    MovingState = MovingStates.Crouching;
+                    m_Movement.Crouch();
                     break;
             }
         }

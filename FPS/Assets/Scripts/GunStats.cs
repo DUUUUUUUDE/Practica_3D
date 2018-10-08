@@ -78,22 +78,20 @@ public class GunStats : MonoBehaviour {
         MagAmmoText.text = MagAmmo.ToString();
     }
 
-    public void Aim ()
+    public void Aim()
     {
-        if (Player_Controller.MovingState != Player_Controller.MovingStates.Aiming)
-        {
-            MaxSpread /= 2;
-            SpreadMod /= 2;
-            MaxRecoil /= 3;
-            RecoilMod *= 2;
-        }
-        else
-        {
-            MaxSpread *= 2;
-            SpreadMod *= 2;
-            MaxRecoil *= 3;
-            RecoilMod /= 2;
-        }
+        MaxSpread /= 2;
+        SpreadMod /= 2;
+        MaxRecoil /= 3;
+        RecoilMod *= 2;
+    }
+
+    public void PutGunDown ()
+    {
+        MaxSpread *= 2;
+        SpreadMod *= 2;
+        MaxRecoil *= 3;
+        RecoilMod /= 2;
     }
 
 }

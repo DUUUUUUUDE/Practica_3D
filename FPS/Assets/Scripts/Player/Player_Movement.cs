@@ -19,7 +19,6 @@ public class Player_Movement : MonoBehaviour {
     public float _NormalMoveSpeed;
     public float _RunMoveSpeed;
     public float _CrouchMoveSpeed;
-    public float _MouseSensitivity;
     #endregion
 
     #region VARS JUMP
@@ -74,6 +73,8 @@ public class Player_Movement : MonoBehaviour {
         _CharacterController = GetComponent<CharacterController>();
     }
 
+    #region MovingModes
+
     public void Walk()
     {
         _MoveSpeed = _NormalMoveSpeed;
@@ -84,11 +85,46 @@ public class Player_Movement : MonoBehaviour {
         _MoveSpeed = _RunMoveSpeed;
     }
 
+    //CROUCH
+    float CrouchingSpeed = 10;
+    Coroutine CrouchCoroutine;
+
     public void Crouch ()
     {
-        _MoveSpeed = _CrouchMoveSpeed;
+        if (CrouchCoroutine != null)
+            StopCoroutine(CrouchCoroutine);
 
+        _MoveSpeed = _CrouchMoveSpeed;
+        CrouchCoroutine = StartCoroutine(CrouchCO());
     }
+    public void StandUp ()
+    {
+        if (CrouchCoroutine != null)
+            StopCoroutine(CrouchCoroutine);
+
+        _MoveSpeed = _NormalMoveSpeed;
+        CrouchCoroutine = StartCoroutine(StandUpCO());
+    }
+
+    IEnumerator CrouchCO()
+    {
+        while (_CharacterController.height > 1)
+        {
+            _CharacterController.height = Mathf.MoveTowards (_CharacterController.height, 1 , CrouchingSpeed*Time.deltaTime);
+            yield return null;
+        }
+    }
+   
+    IEnumerator StandUpCO()
+    {
+        while (_CharacterController.height < 2)
+        {
+            _CharacterController.height = Mathf.MoveTowards(_CharacterController.height, 2, CrouchingSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    #endregion
 
     public void StartJump()
     {
@@ -146,6 +182,13 @@ public class Player_Movement : MonoBehaviour {
         _Velocity.x = Mathf.SmoothDamp(_Velocity.x, targetVelocityX, ref _VelocityGroundSmoothingX, (_CharacterController.isGrounded) ? _ChangeDirectionTimeGround : _ChangeDirectionTimeAir);
         _Velocity.z = Mathf.SmoothDamp(_Velocity.z, targetVelocityZ, ref _VelocityGroundSmoothingZ, (_CharacterController.isGrounded) ? _ChangeDirectionTimeGround : _ChangeDirectionTimeAir);
         _Velocity.y += _Gravity * Time.deltaTime;
+
+        //Aim mod
+        if (Player_Controller.MovingState == Player_Controller.MovingStates.Aiming)
+        {
+            _Velocity.z /= 2;
+            _Velocity.x /= 2;
+        }
 
         //move
         _CharacterController.Move(_Velocity * Time.deltaTime);

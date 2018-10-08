@@ -30,8 +30,6 @@ public class Player_CameraMovement : MonoBehaviour {
         YawRotationalSpeed = RotationalSpeedModifier;
         PitchRotationalSpeed = RotationalSpeedModifier / 2;
 
-        //recoil
-        SetOldPitch();
     }
     // GET MOUSE AXIS
     void GetMouseAxis ()
@@ -63,9 +61,6 @@ public class Player_CameraMovement : MonoBehaviour {
     //RecoilStuff
     float totalRecoil;
     float t;
-    public void SetOldPitch()
-    {
-    }
     public void CameraRecoil (float angle)
     {
         totalRecoil += angle;
