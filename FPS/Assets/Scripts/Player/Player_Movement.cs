@@ -18,6 +18,7 @@ public class Player_Movement : MonoBehaviour {
     public float _ChangeDirGround;
     public float _NormalMoveSpeed;
     public float _RunMoveSpeed;
+    public float _CrouchMoveSpeed;
     public float _MouseSensitivity;
     #endregion
 
@@ -73,17 +74,23 @@ public class Player_Movement : MonoBehaviour {
         _CharacterController = GetComponent<CharacterController>();
     }
 
-    public virtual void Walk()
+    public void Walk()
     {
         _MoveSpeed = _NormalMoveSpeed;
     }
 
-    public virtual void Run()
+    public void Run()
     {
         _MoveSpeed = _RunMoveSpeed;
     }
 
-    public virtual void StartJump()
+    public void Crouch ()
+    {
+        _MoveSpeed = _CrouchMoveSpeed;
+
+    }
+
+    public void StartJump()
     {
         if (CanJump)    //Jump
         {

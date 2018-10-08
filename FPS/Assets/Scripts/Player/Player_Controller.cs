@@ -11,6 +11,8 @@ public class Player_Controller : MonoBehaviour {
     [HideInInspector]
     public static float HP, Shield;
 
+    #region STATES
+
     public enum CombatStates
     {
         Idle,
@@ -23,10 +25,35 @@ public class Player_Controller : MonoBehaviour {
         Aiming,
         Walking,
         Running,
+        Crouching
     };
 
     public static MovingStates MovingState { get; set;}
     public static CombatStates CombatState { get; set;}
+
+    public static void ChangeMovingState (MovingStates newState)
+    {
+        if (newState != MovingState)
+        {
+            switch (newState)
+            {
+                case (MovingStates.Aiming):
+                    break;
+                case (MovingStates.Walking):
+                    MovingState = MovingStates.Walking;
+                    //
+                    break;
+                case (MovingStates.Running):
+                    MovingState = MovingStates.Running;
+                    //
+                    break;
+                case (MovingStates.Crouching):
+                    break;
+            }
+        }
+    }
+
+    #endregion
 
     private void Awake()
     {

@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Player_Gun : MonoBehaviour {
 
-    public GameObject Ball;
-
     List<Bullet> Bullets = new List<Bullet>();
 
     public LayerMask CollisionLayer;
+
+    public GameObject PrimaryWeapon;
+    public GameObject SecondaryWeapon;
 
     public GameObject ActiveGun;
     public GunStats GunStats;
@@ -21,8 +22,8 @@ public class Player_Gun : MonoBehaviour {
 
     private void Start()
     {
-        secondsPerBullet = 60 / GunStats.FireRate;
-        ResetWeapon();
+       //GetNewWeapon(PrimaryWeapon);
+       //ResetWeapon();
     }
 
     private void Update()
@@ -61,10 +62,12 @@ public class Player_Gun : MonoBehaviour {
 
     public void GetNewWeapon (GameObject newGun)
     {
-        ActiveGun.SetActive(false);
+        if (ActiveGun)
+            ActiveGun.SetActive(false);
         ActiveGun = newGun;
         ActiveGun.SetActive(true);
         GunStats = newGun.GetComponentInChildren<GunStats>();
+        secondsPerBullet = 60 / GunStats.FireRate;
         if (Player_Controller.MovingState == Player_Controller.MovingStates.Aiming)
         {
             Player_Controller.MovingState = Player_Controller.MovingStates.Walking;

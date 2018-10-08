@@ -26,9 +26,18 @@ public class Player_Input : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
 
+        #region Interact
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            //Interact
+        }
+
+        #endregion
+
         #region GUN
 
-        if (Player_Controller.CombatState != Player_Controller.CombatStates.Reloading)
+        if (Player_Controller.CombatState != Player_Controller.CombatStates.Reloading && Player_Controller.m_Gun.ActiveGun)
         {
             if (Input.GetButton("Fire1"))
             {
@@ -52,7 +61,23 @@ public class Player_Input : MonoBehaviour {
                 Player_Controller.m_Gun.ReloadWeapon();
             }
         }
-        
+
+        // Change Weapon
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (Player_Controller.m_Gun.PrimaryWeapon && Player_Controller.m_Gun.ActiveGun != Player_Controller.m_Gun.PrimaryWeapon)
+            {
+                Player_Controller.m_Gun.GetNewWeapon(Player_Controller.m_Gun.PrimaryWeapon);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (Player_Controller.m_Gun.SecondaryWeapon && Player_Controller.m_Gun.ActiveGun != Player_Controller.m_Gun.SecondaryWeapon)
+            {
+                Player_Controller.m_Gun.GetNewWeapon(Player_Controller.m_Gun.SecondaryWeapon);
+            }
+        }
+
         #endregion
 
         #region MOVEMENT
