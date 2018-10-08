@@ -143,8 +143,6 @@ public class Player_Movement : MonoBehaviour {
         //move
         _CharacterController.Move(_Velocity * Time.deltaTime);
 
-
-
         // reset fall
         if ((_CharacterController.isGrounded))
         {
@@ -153,6 +151,11 @@ public class Player_Movement : MonoBehaviour {
                 LateGrounded = true;
                 ChecKSlope();
             }
+
+            Debug.Log(_Velocity.y);
+
+            if (_Velocity.y < -50)
+                Player_Controller.KillPlayer();
 
             _Velocity.y = 0;
             CanJump = true;

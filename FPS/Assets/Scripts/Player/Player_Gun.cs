@@ -149,6 +149,8 @@ public class Player_Gun : MonoBehaviour {
             b.LastPos = b.Pos;
             b.Pos += b.Direction * GunStats.Speed;
             b.TimeAlive -= Time.deltaTime;
+            if (b.TimeAlive < 0)
+                RemoveList.Add(b);
         }
     }
 
@@ -162,6 +164,9 @@ public class Player_Gun : MonoBehaviour {
             if (Physics.Raycast (ray, out hit, Vector3.Distance (b.LastPos,b.Pos),CollisionLayer.value))
             {
                 b.Collision = hit.point;
+                GameObject colParticle = Player_Controller.GetColParticle;
+                colParticle.transform.position = hit.point;
+                colParticle.transform.rotation = Quaternion.LookRotation (hit.normal);
                 RemoveList.Add(b);
             }
         }
@@ -196,7 +201,6 @@ public class Player_Gun : MonoBehaviour {
     {
         foreach (Bullet b in RemoveList)
         {
-            Instantiate(Ball, b.Collision, Quaternion.identity);
             Bullets.Remove(b);
         }
         RemoveList.Clear();
@@ -204,11 +208,4 @@ public class Player_Gun : MonoBehaviour {
     #endregion
 }
 
-public class Bullet 
-{
-    public Vector3 Pos;
-    public Vector3 LastPos;
-    public Vector3 Direction;
-    public Vector3 Collision;
-    public float TimeAlive = 10;
-}
+

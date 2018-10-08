@@ -47,6 +47,8 @@ public class Player_Controller : MonoBehaviour {
         MovingState = MovingStates.Walking;
         HP = MaxHP;
         Shield = MaxShield;
+
+        SetUpPools();
     }
 
     public void Damage (float dmg)
@@ -74,5 +76,41 @@ public class Player_Controller : MonoBehaviour {
 
     public static Player_Gun m_Gun { get; private set; }
 
+    #region Pools
+    public Transform ColParticlePool;
+    public GameObject ColParticle;
+    public int ParticleNum;
+
+    void SetUpPools()
+    {
+        for (int i = 0; i < ParticleNum; i++)
+            ColParticles.Add(Instantiate(ColParticle, ColParticlePool));
+    }
+
+    static List<GameObject> ColParticles = new List<GameObject>();
+    public static GameObject GetColParticle
+    {
+        get
+        {
+            foreach (GameObject g in ColParticles)
+            {
+                if (!g.activeSelf)
+                {
+                    g.SetActive(true);
+                    return g;
+                }
+            }
+            return null;
+        }
+    }
+    #endregion 
+
+    public static void KillPlayer ()
+    {
+        Time.timeScale = 0;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 
 }
