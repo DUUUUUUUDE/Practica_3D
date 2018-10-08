@@ -13,8 +13,8 @@ public class Player_UI : MonoBehaviour {
 
     public void RefreshHpAndShield ()
     {
-        HP1.fillAmount = HP2.fillAmount = Player_Controller._PlayerController.HP / Player_Controller._PlayerController.MaxHP;
-        Shield1.fillAmount = Shield2.fillAmount = Player_Controller._PlayerController.Shield / Player_Controller._PlayerController.MaxShield;
+        HP1.fillAmount = HP2.fillAmount = Player_Controller.HP / Player_Controller.MaxHP;
+        Shield1.fillAmount = Shield2.fillAmount = Player_Controller.Shield / Player_Controller.MaxShield;
     }
 
 }

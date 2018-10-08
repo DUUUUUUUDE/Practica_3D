@@ -17,19 +17,21 @@ public class GunStats : MonoBehaviour {
     public Vector3 AimPos;
     public Vector3 AimRot;
 
+
     public float MaxAmmo;
     public float Ammo;
+    public float MaxMagAmmo;
+    public float MagAmmo;
 
-    Image AmmoImage;
-    Text AmmoText;
+    public Image MagAmmoImage;
+    public Text MagAmmoText;
+    public Text AmmoText;
 
     private void Awake()
     {
         HipPos = transform.localPosition;
         HipRot = transform.localEulerAngles;
 
-        AmmoImage = GetComponentInChildren<Image>();
-        AmmoText = GetComponentInChildren<Text>();
 
         Reload();
     }
@@ -39,20 +41,41 @@ public class GunStats : MonoBehaviour {
         GetComponent<Animator>().Play(0);
     }
 
+    float toMagAmmo;
     public void Reload ()
     {
-        Ammo = MaxAmmo;
-        AmmoImage.fillAmount = Ammo / MaxAmmo;
-        AmmoText.text = Ammo.ToString();
+        if (Ammo > MaxMagAmmo - MagAmmo)
+        {
+            toMagAmmo = MaxMagAmmo;
+            Ammo -= MaxMagAmmo - MagAmmo;
+        }
+        else
+        {
+            toMagAmmo = Ammo + MagAmmo;
+            Ammo = 0;
+        }
+
+        if (toMagAmmo > 0)
+        {
+            MagAmmo = toMagAmmo;
+            RefreshUI();
+        }
         Player_Controller.CombatState = Player_Controller.CombatStates.Idle;
 
     }
 
+    public void RefreshUI ()
+    {
+        MagAmmoImage.fillAmount = MagAmmo / MaxMagAmmo;
+        MagAmmoText.text = MagAmmo.ToString();
+        AmmoText.text = Ammo.ToString();
+    }
+
     public void Shoot ()
     {
-        Ammo--;
-        AmmoImage.fillAmount = Ammo / MaxAmmo;
-        AmmoText.text = Ammo.ToString();
+        MagAmmo--;
+        MagAmmoImage.fillAmount = MagAmmo / MaxMagAmmo;
+        MagAmmoText.text = MagAmmo.ToString();
     }
 
     public void Aim ()

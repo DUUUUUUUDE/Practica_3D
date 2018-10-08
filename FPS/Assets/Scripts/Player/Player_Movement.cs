@@ -152,8 +152,6 @@ public class Player_Movement : MonoBehaviour {
                 ChecKSlope();
             }
 
-            Debug.Log(_Velocity.y);
-
             if (_Velocity.y < -50)
                 Player_Controller.KillPlayer();
 

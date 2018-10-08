@@ -16,10 +16,6 @@ public class GameManager : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
-
-
-   
 }
 
 public class Bullet

@@ -99,7 +99,7 @@ public class Player_Gun : MonoBehaviour {
         if (firstShoot)
             Player_Controller.m_CameraMovement.SetOldPitch();
 
-        if (recoil > 0 && GunStats.Ammo > 0)
+        if (recoil > 0 && GunStats.MagAmmo > 0)
         {
             Player_Controller.m_CameraMovement.CameraRecoil(recoil);
         }
@@ -177,7 +177,7 @@ public class Player_Gun : MonoBehaviour {
     // ADD BULLET
     void AddBullet ()
     {
-        if (GunStats.Ammo > 0)
+        if (GunStats.MagAmmo > 0)
         {
             Bullet newBullet = new Bullet();
             newBullet.Pos = Player_Controller.MainCamera.transform.position;

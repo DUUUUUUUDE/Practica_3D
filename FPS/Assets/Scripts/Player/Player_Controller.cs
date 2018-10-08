@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Player_Controller : MonoBehaviour {
 
-    public static Player_Controller _PlayerController;
+    public static Player_Controller _Instace;
 
-    public float MaxHP;
-    public float MaxShield;
+    public static float MaxHP, MaxShield;
 
     [HideInInspector]
-    public float HP, Shield;
+    public static float HP, Shield;
 
     public enum CombatStates
     {
@@ -31,7 +30,7 @@ public class Player_Controller : MonoBehaviour {
 
     private void Awake()
     {
-        _PlayerController = this;
+        _Instace = this;
         GetVariables();
     }
 
@@ -62,7 +61,6 @@ public class Player_Controller : MonoBehaviour {
 
         m_UI.RefreshHpAndShield();
     }
-
 
     public static Player_UI m_UI { get; private set; }
 
