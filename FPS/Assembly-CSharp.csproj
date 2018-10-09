@@ -119,6 +119,7 @@
     <Compile Include="Assets\Scripts\Player\Player_Controller.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Gun.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Input.cs" />
+    <Compile Include="Assets\Scripts\Player\Player_Interact.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Movement.cs" />
     <Compile Include="Assets\Scripts\Player\Player_UI.cs" />
     <None Include="Assets\NatureStarterKit2\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />

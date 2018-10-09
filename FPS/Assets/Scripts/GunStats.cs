@@ -31,16 +31,34 @@ public class GunStats : MonoBehaviour {
     {
         HipPos = transform.localPosition;
         HipRot = transform.localEulerAngles;
-
+        GunAnimation = GetComponent<Animation>();
 
         Reload();
     }
 
+    #region Animations
+
+    Animation GunAnimation;
     public void PlayRecoil ()
     {
-        GetComponent<Animator>().Play(0);
+       GunAnimation.Stop();
+       GunAnimation.Play("Recoil");
+    }
+    public void PlayIdle ()
+    {
+        GunAnimation.CrossFadeQueued("Idle", 0.5f);
+    }
+    public void StopAnimation ()
+    {
+        GunAnimation.Stop();
     }
 
+    private void Update()
+    {
+    }
+    #endregion
+
+    #region Reload
     float toMagAmmo;
     public void Reload ()
     {
@@ -70,6 +88,8 @@ public class GunStats : MonoBehaviour {
         MagAmmoText.text = MagAmmo.ToString();
         AmmoText.text = Ammo.ToString();
     }
+    #endregion
+
 
     public void Shoot ()
     {
@@ -78,6 +98,7 @@ public class GunStats : MonoBehaviour {
         MagAmmoText.text = MagAmmo.ToString();
     }
 
+    #region Aim
     public void Aim()
     {
         MaxSpread /= 2;
@@ -93,5 +114,5 @@ public class GunStats : MonoBehaviour {
         MaxRecoil *= 3;
         RecoilMod /= 2;
     }
-
+    #endregion
 }
