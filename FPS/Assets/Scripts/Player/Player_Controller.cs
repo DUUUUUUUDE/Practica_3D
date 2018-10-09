@@ -38,6 +38,7 @@ public class Player_Controller : MonoBehaviour {
             }
             m_Gun.AimGun();
             Aiming = true;
+            m_Gun.GunStats.StopAnimation();
         }
     }
     public static void PutGunDown ()
@@ -105,8 +106,10 @@ public class Player_Controller : MonoBehaviour {
         m_Movement = FindObjectOfType<Player_Movement>();
         m_CameraMovement = FindObjectOfType<Player_CameraMovement>();
         m_UI = FindObjectOfType<Player_UI>();
-        MainCamera = Camera.main;
         m_Gun = FindObjectOfType<Player_Gun>();
+        m_Interact = FindObjectOfType<Player_Interact>();
+
+        MainCamera = Camera.main;
         CombatState = CombatStates.Idle;
         MovingState = MovingStates.Walking;
         HP = MaxHP;
@@ -138,6 +141,9 @@ public class Player_Controller : MonoBehaviour {
     public static Player_CameraMovement m_CameraMovement { get; private set; }
 
     public static Player_Gun m_Gun { get; private set; }
+
+    public static Player_Interact m_Interact { get; private set; }
+
 
     #region Pools
     public Transform ColParticlePool;

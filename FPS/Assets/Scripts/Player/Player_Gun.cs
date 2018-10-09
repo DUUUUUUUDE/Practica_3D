@@ -42,6 +42,8 @@ public class Player_Gun : MonoBehaviour {
         ActiveGun.SetActive(true);
         GunStats = newGun.GetComponentInChildren<GunStats>();
         secondsPerBullet = 60 / GunStats.FireRate;
+        GunStats.PlayIdle();
+        ResetWeapon();
     }
 
     #region AIM
@@ -55,7 +57,6 @@ public class Player_Gun : MonoBehaviour {
         AimCO = StartCoroutine(Aim(ActiveGun));
         GunStats.Aim();
         ActiveGun.transform.localEulerAngles = GunStats.AimRot;
-
         recoil = GunStats.MaxRecoil;
     }
 
@@ -98,11 +99,6 @@ public class Player_Gun : MonoBehaviour {
     bool firstShoot = true;
     public void Shootig ()
     {
-        if (recoil > 0 && GunStats.MagAmmo > 0)
-        {
-            Player_Controller.m_CameraMovement.CameraRecoil(recoil);
-        }
-
         timeToShoot += Time.deltaTime;
         if (timeToShoot > secondsPerBullet)
         {
@@ -130,6 +126,7 @@ public class Player_Gun : MonoBehaviour {
         recoil = GunStats.MaxRecoil;
         timeToShoot = secondsPerBullet;
         firstShoot = true;
+        GunStats.PlayIdle();
     }
 
     public void ReloadWeapon ()
@@ -191,6 +188,7 @@ public class Player_Gun : MonoBehaviour {
             //Gun Stuff
             GunStats.PlayRecoil();
             GunStats.Shoot();
+            Player_Controller.m_CameraMovement.CameraRecoil(recoil);
         }
     }
 

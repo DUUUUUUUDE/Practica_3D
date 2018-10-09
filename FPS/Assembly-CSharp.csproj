@@ -114,6 +114,7 @@
     <Compile Include="Assets\ProCore\ProGrids\MonoBehaviour\pg_IgnoreSnap.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GunStats.cs" />
+    <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\Pack.cs" />
     <Compile Include="Assets\Scripts\Player\Player_CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Controller.cs" />

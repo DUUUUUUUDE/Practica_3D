@@ -208,7 +208,7 @@ MonoBehaviour:
   Speed: 100
   MaxSpread: 5
   SpreadMod: 1
-  MaxRecoil: 0.75
+  MaxRecoil: 3
   RecoilMod: 1
   FireRate: 600
   HipPos: {x: 0, y: 0, z: 0}
@@ -37027,7 +37027,7 @@ MonoBehaviour:
   Speed: 100
   MaxSpread: 10
   SpreadMod: 1
-  MaxRecoil: 1
+  MaxRecoil: 6
   RecoilMod: 2
   FireRate: 300
   HipPos: {x: 0, y: 0, z: 0}
