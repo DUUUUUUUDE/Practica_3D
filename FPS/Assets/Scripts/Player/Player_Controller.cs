@@ -22,11 +22,32 @@ public class Player_Controller : MonoBehaviour {
 
     public enum MovingStates
     {
-        Aiming,
         Walking,
         Running,
         Crouching
     };
+
+    public static bool Aiming;
+    public static void Aim ()
+    {
+        if (!Aiming)
+        {
+            if (MovingState == MovingStates.Running)
+            {
+                ChangeMovingState(MovingStates.Walking);
+            }
+            m_Gun.AimGun();
+            Aiming = true;
+        }
+    }
+    public static void PutGunDown ()
+    {
+        if (Aiming)
+        {
+            m_Gun.PutGunDown();
+            Aiming = false;
+        }
+    }
 
     public static MovingStates MovingState { get; set;}
     public static CombatStates CombatState { get; set;}
@@ -35,26 +56,21 @@ public class Player_Controller : MonoBehaviour {
     {
         if (newState != MovingState)
         {
+            //StopState
             switch (MovingState)
             {
-                case (MovingStates.Aiming):
-                    m_Gun.PutGunDown();
-                    break;
                 case (MovingStates.Walking):
                     break;
                 case (MovingStates.Running):
                     break;
                 case (MovingStates.Crouching):
+                    m_Movement.StandUp();
                     break;
             }
 
 
             switch (newState)
             {
-                case (MovingStates.Aiming):
-                    MovingState = MovingStates.Aiming;
-                    m_Gun.AimGun();
-                    break;
                 case (MovingStates.Walking):
                     MovingState = MovingStates.Walking;
                     m_Movement.StandUp();
@@ -62,6 +78,8 @@ public class Player_Controller : MonoBehaviour {
                     break;
                 case (MovingStates.Running):
                     MovingState = MovingStates.Running;
+                    if (m_Gun.ActiveGun)
+                        PutGunDown();
                     m_Movement.StandUp();
                     m_Movement.Run();
                     break;

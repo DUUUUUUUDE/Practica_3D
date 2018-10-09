@@ -33,10 +33,8 @@ public class Player_Gun : MonoBehaviour {
 
     public void GetNewWeapon(GameObject newGun)
     {
-        if (Player_Controller.MovingState == Player_Controller.MovingStates.Aiming)
-        {
-            Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Walking);
-        }
+        if (ActiveGun && Player_Controller.Aiming)
+            Player_Controller.PutGunDown();
 
         if (ActiveGun)
             ActiveGun.SetActive(false);

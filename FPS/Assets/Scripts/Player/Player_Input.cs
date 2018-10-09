@@ -50,19 +50,12 @@ public class Player_Input : MonoBehaviour {
             //AIM
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Aiming);
+                Player_Controller.Aim ();
             }
             //PUT GUN DOWN
             if (Input.GetKeyUp(KeyCode.Mouse1))
             {
-                if (GetComponent<CharacterController>().height > 1)
-                {
-                    Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Walking);
-                }
-                else
-                {
-                    Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Crouching);
-                }
+                Player_Controller.PutGunDown();
             }
             if (Input.GetKeyDown(KeyCode.R))
             {

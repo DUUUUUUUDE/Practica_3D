@@ -184,7 +184,7 @@ public class Player_Movement : MonoBehaviour {
         _Velocity.y += _Gravity * Time.deltaTime;
 
         //Aim mod
-        if (Player_Controller.MovingState == Player_Controller.MovingStates.Aiming)
+        if (Player_Controller.Aiming)
         {
             _Velocity.z /= 2;
             _Velocity.x /= 2;
