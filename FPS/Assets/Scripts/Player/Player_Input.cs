@@ -39,6 +39,12 @@ public class Player_Input : MonoBehaviour {
 
         if (Player_Controller.CombatState != Player_Controller.CombatStates.Reloading && Player_Controller.m_Gun.ActiveGun)
         {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Player_Controller.CombatState = Player_Controller.CombatStates.Shooting;
+                if (!Player_Controller.Aiming)
+                    Player_Controller.SetAnimation(Player_Controller.AnimationStates.Idle);
+            }
             if (Input.GetButton("Fire1"))
             {
                 Player_Controller.m_Gun.Shootig();
@@ -53,13 +59,13 @@ public class Player_Input : MonoBehaviour {
                 Player_Controller.Aim ();
             }
             //PUT GUN DOWN
-            if (Input.GetKeyUp(KeyCode.Mouse1))
+            if (Input.GetKeyUp(KeyCode.Mouse1) && Player_Controller.Aiming)
             {
                 Player_Controller.PutGunDown();
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
-                Player_Controller.CombatState = Player_Controller.CombatStates.Reloading;
+
                 Player_Controller.m_Gun.ReloadWeapon();
             }
         }

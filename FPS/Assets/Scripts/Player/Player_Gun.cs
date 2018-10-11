@@ -42,7 +42,7 @@ public class Player_Gun : MonoBehaviour {
         ActiveGun.SetActive(true);
         GunStats = newGun.GetComponentInChildren<GunStats>();
         secondsPerBullet = 60 / GunStats.FireRate;
-        GunStats.PlayIdle();
+        Player_Controller.RefreshAnimation();
         ResetWeapon();
     }
 
@@ -74,6 +74,7 @@ public class Player_Gun : MonoBehaviour {
 
     IEnumerator Aim (GameObject target)
     {
+
         while  (target.transform.localPosition != target.GetComponent<GunStats>().AimPos)
         {
             target.transform.localPosition = Vector3.MoveTowards(target.transform.localPosition, target.GetComponent<GunStats>().AimPos, aimSpeed * Time.deltaTime);
@@ -126,12 +127,17 @@ public class Player_Gun : MonoBehaviour {
         recoil = GunStats.MaxRecoil;
         timeToShoot = secondsPerBullet;
         firstShoot = true;
-        GunStats.PlayIdle();
+        Player_Controller.CombatState = Player_Controller.CombatStates.Idle;
+        Player_Controller.RefreshAnimation();
     }
 
     public void ReloadWeapon ()
     {
-        GunStats.Reload();
+        if (GunStats.MagAmmo < GunStats.MaxMagAmmo)
+        {
+            Player_Controller.CombatState = Player_Controller.CombatStates.Reloading;
+            GunStats.Reload();
+        }
     }
 
     #endregion

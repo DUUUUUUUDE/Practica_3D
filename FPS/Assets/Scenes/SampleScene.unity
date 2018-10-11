@@ -177,7 +177,7 @@ Transform:
   - {fileID: 632976831}
   m_Father: {fileID: 534669905}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -1.9050001, y: 89.98801, z: 4.4880004}
+  m_LocalEulerAnglesHint: {x: -4.738219, y: 89.98801, z: 4.48855}
 --- !u!111 &14527340
 Animation:
   m_ObjectHideFlags: 0
@@ -186,10 +186,13 @@ Animation:
   m_GameObject: {fileID: 14527338}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: c91d7ac03c7326f4ca9f9ce94f2abb45, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 796d36c0b69e2994283841e5e5a7c4ad, type: 2}
   - {fileID: 7400000, guid: 38581602b3e2e8a4baad837e129c668d, type: 2}
+  - {fileID: 7400000, guid: 2eb869b7c3944f041a0e690285d462a0, type: 2}
+  - {fileID: 7400000, guid: 498d983925228304986bad412dc4d345, type: 2}
+  - {fileID: 7400000, guid: c91d7ac03c7326f4ca9f9ce94f2abb45, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -9459,17 +9462,9 @@ MonoBehaviour:
     areaError: 15
   asset_guid: 
   dontDestroyMeshOnDelete: 0
-  m_selectedFaces: 1e000000
-  m_SelectedEdges:
-  - x: 120
-    y: 121
-  - x: 122
-    y: 120
-  - x: 121
-    y: 123
-  - x: 123
-    y: 122
-  m_selectedTriangles: 78000000790000007a000000790000007b0000007a000000
+  m_selectedFaces: 
+  m_SelectedEdges: []
+  m_selectedTriangles: 
 --- !u!33 &433511817
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9699,7 +9694,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 532363125}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.75, z: 0}
+  m_LocalPosition: {x: -140.9, y: -1.75, z: 65.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 605487993}
@@ -11536,7 +11531,7 @@ Transform:
   - {fileID: 545767026}
   m_Father: {fileID: 1811987361}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -49.172, y: -78.133, z: 85.714005}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 90.00001}
 --- !u!1 &746122338
 GameObject:
   m_ObjectHideFlags: 0
@@ -14809,7 +14804,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh13748
+  m_Name: pb_Mesh13844
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -15211,7 +15206,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh13664
+  m_Name: pb_Mesh13660
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -20053,7 +20048,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh13564
+  m_Name: pb_Mesh13560
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -21096,7 +21091,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-354478
+  m_Name: pb_Mesh-1088
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -26076,25 +26071,9 @@ MonoBehaviour:
     areaError: 15
   asset_guid: 
   dontDestroyMeshOnDelete: 0
-  m_selectedFaces: 3e0000004b000000
-  m_SelectedEdges:
-  - x: 248
-    y: 249
-  - x: 249
-    y: 250
-  - x: 250
-    y: 251
-  - x: 251
-    y: 248
-  - x: 300
-    y: 301
-  - x: 302
-    y: 300
-  - x: 301
-    y: 303
-  - x: 303
-    y: 302
-  m_selectedTriangles: fa000000f8000000f9000000fa000000fb000000f80000002c0100002d0100002e0100002d0100002f0100002e010000
+  m_selectedFaces: 
+  m_SelectedEdges: []
+  m_selectedTriangles: 
 --- !u!33 &1289056453
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -28816,7 +28795,7 @@ Transform:
   - {fileID: 1331149019}
   m_Father: {fileID: 1841312045}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 79.254005}
 --- !u!1 &1587645403
 GameObject:
   m_ObjectHideFlags: 0
@@ -36863,7 +36842,7 @@ Transform:
   - {fileID: 1841312045}
   m_Father: {fileID: 14527339}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -0.6055024, y: -89.98002, z: 89.99815}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 90.00001}
 --- !u!1 &1811832037
 GameObject:
   m_ObjectHideFlags: 0
@@ -36989,10 +36968,13 @@ Animation:
   m_GameObject: {fileID: 1811987359}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 55461487e662cac44b33c0d1fd906a68, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: d9fbdddcd1a5b4841871fe57c6f06e95, type: 2}
   - {fileID: 7400000, guid: e67b49e2c34122541b038674966d7f9a, type: 2}
+  - {fileID: 7400000, guid: 28bb5b15c388562439715fcf853e0a8b, type: 2}
+  - {fileID: 7400000, guid: a7d7a0dd0a6770d459309c2cc4f2d1ef, type: 2}
+  - {fileID: 7400000, guid: 55461487e662cac44b33c0d1fd906a68, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -37012,7 +36994,7 @@ Transform:
   - {fileID: 105213361}
   m_Father: {fileID: 534669905}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -10.621, y: 88.497, z: 1.445}
+  m_LocalEulerAnglesHint: {x: 17.042002, y: 14.852, z: -5.399}
 --- !u!114 &1811987362
 MonoBehaviour:
   m_ObjectHideFlags: 0

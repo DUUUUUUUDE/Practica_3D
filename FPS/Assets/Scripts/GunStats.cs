@@ -33,7 +33,7 @@ public class GunStats : MonoBehaviour {
         HipRot = transform.localEulerAngles;
         GunAnimation = GetComponent<Animation>();
 
-        Reload();
+        ReloadStuff();
     }
 
     #region Animations
@@ -43,24 +43,33 @@ public class GunStats : MonoBehaviour {
     {
        GunAnimation.Stop();
        GunAnimation.Play("Recoil");
-    }
-    public void PlayIdle ()
-    {
-        GunAnimation.CrossFadeQueued("Idle", 0.5f);
-    }
-    public void StopAnimation ()
-    {
-        GunAnimation.Stop();
+      // RefreshAnimation();
     }
 
-    private void Update()
+    public void PlayIdle ()
     {
+        GunAnimation.CrossFade("Idle", 0.2f);
     }
+    public void PlayRun()
+    {
+        GunAnimation.CrossFade("Run", 0.2f);
+    }
+    public void PlayAim ()
+    {
+        GunAnimation.Play("Aim");
+    }
+
     #endregion
 
     #region Reload
     float toMagAmmo;
+
     public void Reload ()
+    {
+        StartReloading();
+    }
+
+    void ReloadStuff ()
     {
         if (Ammo > MaxMagAmmo - MagAmmo)
         {
@@ -78,8 +87,8 @@ public class GunStats : MonoBehaviour {
             MagAmmo = toMagAmmo;
             RefreshUI();
         }
-        Player_Controller.CombatState = Player_Controller.CombatStates.Idle;
 
+        RefreshUI();
     }
 
     public void RefreshUI ()
@@ -88,6 +97,34 @@ public class GunStats : MonoBehaviour {
         MagAmmoText.text = MagAmmo.ToString();
         AmmoText.text = Ammo.ToString();
     }
+
+    Coroutine ReloadGun;
+    
+    public void StartReloading ()
+    {
+        GunAnimation.Play("Reload");
+        GunAnimation.CrossFadeQueued("Idle",0.1f);
+        ReloadGun = StartCoroutine(ReloadCO());
+        Player_Controller.PutGunDown();
+    }
+    public void StopReloading()
+    {
+        StopCoroutine(ReloadGun);
+        Player_Controller.CombatState = Player_Controller.CombatStates.Idle;
+        GunAnimation.CrossFade("Idle",0.1f);
+    }
+
+    IEnumerator ReloadCO ()
+    {
+        yield return new WaitForSeconds (GunAnimation.clip.length);
+        ReloadStuff();
+
+        Player_Controller.CombatState = Player_Controller.CombatStates.Idle;
+
+        if (Player_Controller.MovingState == Player_Controller.MovingStates.Running)
+            Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Running);
+    }
+
     #endregion
 
 
@@ -105,6 +142,9 @@ public class GunStats : MonoBehaviour {
         SpreadMod /= 2;
         MaxRecoil /= 3;
         RecoilMod *= 2;
+
+        GunAnimation.Stop();
+        GunAnimation.CrossFade("Aim",0.2f);
     }
 
     public void PutGunDown ()
