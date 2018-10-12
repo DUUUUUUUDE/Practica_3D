@@ -26,15 +26,17 @@ MonoBehaviour:
   - pbEditorScroll.x
   - pbEditorScroll.y
   - pbGrowSelectionAngle
-  m_String_keys: []
+  m_String_keys:
+  - pbCurrentMaterialPalette
   m_Color_keys: []
   m_Material_keys: []
-  m_Bool_values: 01010001
+  m_Bool_values: 01010000
   m_Int_values: 0000000001000000020000000100000000000000
   m_Float_values:
   - 0
   - 0
   - 42
-  m_String_values: []
+  m_String_values:
+  - Assets/ProCore/ProBuilder/Data/Default Material Palette.asset
   m_Color_values: []
   m_Material_values: []

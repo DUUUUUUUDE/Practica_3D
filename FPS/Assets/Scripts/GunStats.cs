@@ -153,6 +153,7 @@ public class GunStats : MonoBehaviour {
         SpreadMod *= 2;
         MaxRecoil *= 3;
         RecoilMod /= 2;
+        GunAnimation.CrossFade("Idle", 0.2f);
     }
     #endregion
 }

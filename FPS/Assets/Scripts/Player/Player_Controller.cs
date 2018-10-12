@@ -110,7 +110,6 @@ public class Player_Controller : MonoBehaviour {
                     SetAnimation(AnimationStates.Idle);
                     break;
                 case (MovingStates.Running):
-                    Debug.Log(CombatState);
                     if (CombatState != CombatStates.Reloading && CombatState != CombatStates.Shooting)
                     {
                         if (m_Gun.ActiveGun)

@@ -41,11 +41,12 @@ public class Player_Input : MonoBehaviour {
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                Player_Controller.CombatState = Player_Controller.CombatStates.Shooting;
-                if (!Player_Controller.Aiming)
-                    Player_Controller.SetAnimation(Player_Controller.AnimationStates.Idle);
+                if (Player_Controller.MovingState == Player_Controller.MovingStates.Running)
+                    Player_Controller.m_Gun.GunStats.PlayAim();
+                else
+                    Player_Controller.CombatState = Player_Controller.CombatStates.Shooting;
             }
-            if (Input.GetButton("Fire1"))
+            if (Input.GetButton("Fire1") && Player_Controller.MovingState != Player_Controller.MovingStates.Running)
             {
                 Player_Controller.m_Gun.Shootig();
             }
