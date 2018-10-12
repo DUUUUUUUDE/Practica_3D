@@ -112,9 +112,13 @@
     <Compile Include="Assets\ProCore\ProGrids\Classes\pg_SceneMeshRender.cs" />
     <Compile Include="Assets\ProCore\ProGrids\Classes\pg_Util.cs" />
     <Compile Include="Assets\ProCore\ProGrids\MonoBehaviour\pg_IgnoreSnap.cs" />
+    <Compile Include="Assets\Scripts\Damageable.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GunStats.cs" />
-    <Compile Include="Assets\Scripts\Interactable.cs" />
+    <Compile Include="Assets\Scripts\Interactables\Button_ReplenishAmmo.cs" />
+    <Compile Include="Assets\Scripts\Interactables\Button_ReplenishHP.cs" />
+    <Compile Include="Assets\Scripts\Interactables\Gallery_StartButton.cs" />
+    <Compile Include="Assets\Scripts\Interactables\Interactable.cs" />
     <Compile Include="Assets\Scripts\Pack.cs" />
     <Compile Include="Assets\Scripts\Player\Player_CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Controller.cs" />
@@ -123,6 +127,9 @@
     <Compile Include="Assets\Scripts\Player\Player_Interact.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Movement.cs" />
     <Compile Include="Assets\Scripts\Player\Player_UI.cs" />
+    <Compile Include="Assets\Scripts\ShootingGallery\Controller_Gallery.cs" />
+    <Compile Include="Assets\Scripts\ShootingGallery\Gallery_EndGame.cs" />
+    <Compile Include="Assets\Scripts\ShootingGallery\Target.cs" />
     <None Include="Assets\NatureStarterKit2\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
     <None Include="Assets\ProCore\ProGrids\Shader\pg_GridShader.shader" />

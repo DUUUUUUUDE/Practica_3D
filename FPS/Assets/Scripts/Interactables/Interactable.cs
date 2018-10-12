@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour {
 
+    public string InteractString;
+
 	public virtual void OnEnter ()
     {
+        Player_Controller.m_Interact.DisplayInteractKey(InteractString);
 
     }
 
@@ -16,6 +19,6 @@ public class Interactable : MonoBehaviour {
 
     public virtual void OnExit ()
     {
-
+        Player_Controller.m_Interact.HideInteractKey();
     }
 }

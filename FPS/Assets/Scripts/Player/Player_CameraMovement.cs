@@ -13,6 +13,7 @@ public class Player_CameraMovement : MonoBehaviour {
     public float Yawn;             // YAxis
     public float Pitch;            // XAxis
 
+    const float RotationMod = 36.0f; 
     float RotationalSpeedModifier = 36.0f;
     float YawRotationalSpeed;
     float PitchRotationalSpeed;
@@ -26,11 +27,18 @@ public class Player_CameraMovement : MonoBehaviour {
 
         Yawn = transform.rotation.eulerAngles.y;
         Pitch = PitchControllerTransform.localRotation.eulerAngles.x;
-        RotationalSpeedModifier *= Player_Controller.m_Input.Sensibility;
+        SetUpSensibility();
+
+    }
+    public void SetUpSensibility ()
+    {
+
+        RotationalSpeedModifier = RotationMod * Player_Controller.m_Input.Sensibility;
         YawRotationalSpeed = RotationalSpeedModifier;
         PitchRotationalSpeed = RotationalSpeedModifier / 2;
 
     }
+
     // GET MOUSE AXIS
     void GetMouseAxis ()
     {

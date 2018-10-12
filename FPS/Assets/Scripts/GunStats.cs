@@ -143,6 +143,10 @@ public class GunStats : MonoBehaviour {
         MaxRecoil /= 3;
         RecoilMod *= 2;
 
+        Player_Controller.m_Input.Sensibility /= 2;
+        Player_Controller.m_CameraMovement.SetUpSensibility();
+
+
         GunAnimation.Stop();
         GunAnimation.CrossFade("Aim",0.2f);
     }
@@ -153,6 +157,10 @@ public class GunStats : MonoBehaviour {
         SpreadMod *= 2;
         MaxRecoil *= 3;
         RecoilMod /= 2;
+
+        Player_Controller.m_Input.Sensibility *= 2;
+        Player_Controller.m_CameraMovement.SetUpSensibility();
+
         GunAnimation.CrossFade("Idle", 0.2f);
     }
     #endregion

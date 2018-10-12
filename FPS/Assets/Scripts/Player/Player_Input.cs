@@ -30,7 +30,8 @@ public class Player_Input : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            //Interact
+            if (Player_Controller.m_Interact.CurrentInteractable)
+                Player_Controller.m_Interact.CurrentInteractable.OnInteract();
         }
 
         #endregion

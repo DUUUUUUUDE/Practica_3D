@@ -6,7 +6,7 @@ public class Player_Controller : MonoBehaviour {
 
     public static Player_Controller _Instace;
 
-    public static float MaxHP, MaxShield;
+    public static float MaxHP = 100, MaxShield = 100;
 
     [HideInInspector]
     public static float HP, Shield;

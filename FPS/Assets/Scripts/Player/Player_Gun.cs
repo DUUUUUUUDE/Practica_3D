@@ -16,6 +16,9 @@ public class Player_Gun : MonoBehaviour {
 
     public float aimSpeed;
 
+    public Animation HitMark;
+    public Animation KillMark;
+
     float secondsPerBullet;
     float spread;
     float recoil;
@@ -170,6 +173,10 @@ public class Player_Gun : MonoBehaviour {
                 colParticle.transform.position = hit.point;
                 colParticle.transform.rotation = Quaternion.LookRotation (hit.normal);
                 RemoveList.Add(b);
+
+                if (hit.collider.GetComponent<Damageable>())
+                    hit.collider.GetComponent<Damageable>().Damage();
+
             }
         }
         RemoveBullet();
