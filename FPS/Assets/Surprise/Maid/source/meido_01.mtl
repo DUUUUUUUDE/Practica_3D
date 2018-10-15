@@ -1,0 +1,174 @@
+newmtl huku
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\huku.png
+newmtl eye_XSIPOLYCLS.me_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\me_02.png
+newmtl eye_02_AUTO_XSIPOLYCLS.phong1
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+newmtl polymsh_extracted37_AUTO_XSIPOLYCLS.sara
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\sara.png
+newmtl asi_01_AUTO_XSIPOLYCLS.kutu
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\kutu.png
+newmtl tuno_XSIPOLYCLS.kazari
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\kazari.png
+newmtl mune_01_AUTO_XSIPOLYCLS.munenuno
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\mumenunno.png
+newmtl mune_02_AUTO_XSIPOLYCLS.munenuno_siro
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\huku_munenuno.png
+newmtl polymsh_extracted45_AUTO_XSIPOLYCLS.syoltuki1
+Ka 0.300000 0.300000 0.300000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 1
+map_Kd C:\XSI\2016_meido\Pictures\syoltuki.png
+newmtl huriru_asi_AUTO_XSIPOLYCLS.asihuriru
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\huriru.png
+newmtl polymsh_extracted21_AUTO_XSIPOLYCLS.ga-ta-
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\ga-ta-.png
+newmtl cup_XSIPOLYCLS.cup
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\cup.png
+newmtl polymsh_detached11_AUTO_XSIPOLYCLS.kami
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\kami.png
+newmtl polymsh_extracted9_AUTO_XSIPOLYCLS.ke
+Ka 0.300000 0.300000 0.300000
+Kd 0.292000 0.292000 0.292000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 1
+newmtl polymsh_detached15_AUTO_XSIPOLYCLS.kao
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\kao.png
+newmtl cylinder38_XSIPOLYCLS.syoltuki
+Ka 0.250000 0.250000 0.250000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ns 20.000000
+Tr 0.000000
+illum 2
+map_Kd C:\XSI\2016_meido\Pictures\syoltuki.png
+newmtl cylinder24_XSIPOLYCLS.constant
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\obon.png
+newmtl kutu1
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\kutu.png
+newmtl ribon
+Ka 0.300000 0.300000 0.300000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 1
+map_Kd C:\xsi\2017_meido\Pictures\ribon.png
+newmtl polymsh_extracted12_AUTO_XSIPOLYCLS.ribon1
+Ka 0.300000 0.300000 0.300000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 1
+map_Kd C:\xsi\2017_meido\Pictures\ribon.png
+newmtl suka-tohuriru
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\suka-tohuriru.png
+newmtl polymsh_extracted40_AUTO_XSIPOLYCLS.suka-tohuriru1
+Ka 0.000000 0.000000 0.000000
+Kd 0.700000 0.700000 0.700000
+Ks 0.000000 0.000000 0.000000
+Ns 20.000000
+Tr 0.000000
+illum 0
+map_Kd C:\xsi\2017_meido\Pictures\suka-tohuriru.png

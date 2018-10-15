@@ -8,6 +8,9 @@ public class DroneController : MonoBehaviour {
     public float MaxHP;
     float HP;
 
+    public float HearDist;
+    public float HearCrouchDist;
+
     public enum DroneStates
     {
         Idle,
@@ -18,7 +21,7 @@ public class DroneController : MonoBehaviour {
         Hit
     };
     public DroneStates CurrentState;
-    public DroneAction EnterAction;
+    public DroneAction FirstAction;
     DroneAction CurrentAction;
 
     public Animation DroneAnimation;
@@ -27,27 +30,15 @@ public class DroneController : MonoBehaviour {
     private void Start()
     {
         HP = MaxHP;
-        CurrentAction = EnterAction;
+        DroneAnimation = GetComponent<Animation>();
+        NavAgent = GetComponent<NavMeshAgent>();
+
+        CurrentAction = FirstAction;
+        CurrentAction.EnterAction();
     }
     
     private void Update()
     {
-
-        switch (CurrentState)
-        {
-            case (DroneStates.Idle):
-                break;
-            case (DroneStates.Patrol):
-                break;
-            case (DroneStates.Alert):
-                break;
-            case (DroneStates.Chase):
-                break;
-            case (DroneStates.Attack):
-                break;
-            case (DroneStates.Hit):
-                break;
-        }
 
         FindPlayer();
 
@@ -76,7 +67,16 @@ public class DroneController : MonoBehaviour {
 
     void FindPlayer ()
     {
+        if (Vector3.Distance(Player_Controller._Instace.transform.position, transform.position) > HearDist 
+            && Mathf.Abs ( Player_Controller._Instace.transform.position.y - transform.position.y) > HearDist / 2)
+        {
+           
+        }
+        if (Player_Controller.MovingState == Player_Controller.MovingStates.Crouching
+               && Vector3.Distance(Player_Controller._Instace.transform.position, transform.position) > HearDist)
+        {
 
+        }
     }
 
     void ChaseDistance ()
