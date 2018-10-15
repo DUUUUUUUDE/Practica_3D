@@ -91,9 +91,6 @@ public class Player_Movement : MonoBehaviour {
 
     public void Crouch ()
     {
-        if (CrouchCoroutine != null)
-            StopCoroutine(CrouchCoroutine);
-
         _MoveSpeed = _CrouchMoveSpeed;
         CrouchCoroutine = StartCoroutine(CrouchCO());
     }
@@ -149,6 +146,12 @@ public class Player_Movement : MonoBehaviour {
     public void Update()
     {
         NormalMovement();
+
+        //Reset MovingState
+        if (_Velocity.magnitude < Vector3.one.magnitude && Player_Controller.MovingState == Player_Controller.MovingStates.Running)
+        {
+            Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Walking);
+        }
     }
 
     public void SetMoveDirection(Vector2 Direction)
@@ -183,19 +186,22 @@ public class Player_Movement : MonoBehaviour {
         _Velocity.z = Mathf.SmoothDamp(_Velocity.z, targetVelocityZ, ref _VelocityGroundSmoothingZ, (_CharacterController.isGrounded) ? _ChangeDirectionTimeGround : _ChangeDirectionTimeAir);
         _Velocity.y += _Gravity * Time.deltaTime;
 
-        //Aim mod
-        if (Player_Controller.Aiming)
+        if ((_CharacterController.isGrounded))
         {
-            _Velocity.z /= 2;
-            _Velocity.x /= 2;
+            //Aim mod
+            if (Player_Controller.Aiming)
+            {
+                _Velocity.z /= 2;
+                _Velocity.x /= 2;
+            }
         }
-
         //move
         _CharacterController.Move(_Velocity * Time.deltaTime);
 
         // reset fall
         if ((_CharacterController.isGrounded))
         {
+
             if (!LateGrounded)
             {
                 LateGrounded = true;
@@ -217,6 +223,7 @@ public class Player_Movement : MonoBehaviour {
             if (OnSlope)
                 DescendingSlope();
         }
+
     }
 
     #region SLOPES

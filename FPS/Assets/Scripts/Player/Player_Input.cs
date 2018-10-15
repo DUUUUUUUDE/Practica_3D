@@ -104,7 +104,7 @@ public class Player_Input : MonoBehaviour {
             Player_Controller.m_Movement.EndJump();
         }
         //RUN START
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButtonDown("Fire3") && Player_Controller.m_Movement._Velocity != Vector3.zero)
         {
             Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Running);
         }
@@ -114,13 +114,13 @@ public class Player_Input : MonoBehaviour {
             Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Walking);
         }
         //CROUCH START
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Crouching);
-        }
-        if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Walking);
+            if (Player_Controller.MovingState != Player_Controller.MovingStates.Crouching)
+                Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Crouching);
+            else
+                Player_Controller.ChangeMovingState(Player_Controller.MovingStates.Walking);
+
         }
         #endregion
     }

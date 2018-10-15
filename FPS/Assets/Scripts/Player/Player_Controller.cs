@@ -124,7 +124,6 @@ public class Player_Controller : MonoBehaviour {
                 case (MovingStates.Crouching):
                     MovingState = MovingStates.Crouching;
                     m_Movement.Crouch();
-                    SetAnimation(AnimationStates.Idle);
                     break;
             }
         //}

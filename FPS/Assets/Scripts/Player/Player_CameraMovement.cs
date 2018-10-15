@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Player_CameraMovement : MonoBehaviour {
 
-    
+    public Camera GameCamera;
+    public Camera GunCamera;
+
     public float m_MinPitch = -80.0f;
     public float m_MaxPitch = 50.0f;
 

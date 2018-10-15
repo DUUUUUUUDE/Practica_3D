@@ -9,7 +9,6 @@ public class GunStats : MonoBehaviour {
     public float MaxSpread;
     public float SpreadMod;
     public float MaxRecoil;
-    public float RecoilMod;
     public float FireRate;
 
     [HideInInspector]
@@ -27,11 +26,14 @@ public class GunStats : MonoBehaviour {
     public Text MagAmmoText;
     public Text AmmoText;
 
+    public AudioSource GunShoot;
+
     private void Awake()
     {
         HipPos = transform.localPosition;
         HipRot = transform.localEulerAngles;
         GunAnimation = GetComponent<Animation>();
+        GunShoot = GetComponent<AudioSource>();
 
         ReloadStuff();
     }
@@ -140,8 +142,7 @@ public class GunStats : MonoBehaviour {
     {
         MaxSpread /= 2;
         SpreadMod /= 2;
-        MaxRecoil /= 3;
-        RecoilMod *= 2;
+        MaxRecoil *= 2;
 
         Player_Controller.m_Input.Sensibility /= 2;
         Player_Controller.m_CameraMovement.SetUpSensibility();
@@ -155,8 +156,7 @@ public class GunStats : MonoBehaviour {
     {
         MaxSpread *= 2;
         SpreadMod *= 2;
-        MaxRecoil *= 3;
-        RecoilMod /= 2;
+        MaxRecoil /= 2;
 
         Player_Controller.m_Input.Sensibility *= 2;
         Player_Controller.m_CameraMovement.SetUpSensibility();

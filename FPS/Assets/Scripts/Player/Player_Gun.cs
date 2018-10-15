@@ -15,6 +15,11 @@ public class Player_Gun : MonoBehaviour {
     public GunStats GunStats;
 
     public float aimSpeed;
+    public float FOVMod;
+    float AimFOVcamera;
+    float HipFOVcamera;
+    float AimFOVgun;
+    float HipFOVgun;
 
     public Animation HitMark;
     public Animation KillMark;
@@ -25,6 +30,11 @@ public class Player_Gun : MonoBehaviour {
 
     private void Start()
     {
+        AimFOVcamera = Player_Controller.m_CameraMovement.GameCamera.fieldOfView - FOVMod;
+        HipFOVcamera = Player_Controller.m_CameraMovement.GameCamera.fieldOfView;
+
+        AimFOVgun = Player_Controller.m_CameraMovement.GunCamera.fieldOfView - FOVMod;
+        HipFOVgun = Player_Controller.m_CameraMovement.GunCamera.fieldOfView;
     }
 
     private void Update()
@@ -47,6 +57,7 @@ public class Player_Gun : MonoBehaviour {
         secondsPerBullet = 60 / GunStats.FireRate;
         Player_Controller.RefreshAnimation();
         ResetWeapon();
+        
     }
 
     #region AIM
@@ -77,9 +88,12 @@ public class Player_Gun : MonoBehaviour {
 
     IEnumerator Aim (GameObject target)
     {
-
-        while  (target.transform.localPosition != target.GetComponent<GunStats>().AimPos)
+        while  (target.transform.localPosition != target.GetComponent<GunStats>().AimPos 
+            || Player_Controller.m_CameraMovement.GameCamera.fieldOfView != AimFOVcamera
+            || Player_Controller.m_CameraMovement.GunCamera.fieldOfView != AimFOVgun)
         {
+            Player_Controller.m_CameraMovement.GameCamera.fieldOfView = Mathf.MoveTowards(Player_Controller.m_CameraMovement.GameCamera.fieldOfView, AimFOVcamera, aimSpeed * 3 * Time.deltaTime);
+            Player_Controller.m_CameraMovement.GunCamera.fieldOfView = Mathf.MoveTowards(Player_Controller.m_CameraMovement.GunCamera.fieldOfView, AimFOVgun, aimSpeed * 3 * Time.deltaTime);
             target.transform.localPosition = Vector3.MoveTowards(target.transform.localPosition, target.GetComponent<GunStats>().AimPos, aimSpeed * Time.deltaTime);
             yield return null;
         }
@@ -87,8 +101,12 @@ public class Player_Gun : MonoBehaviour {
 
     IEnumerator DeAim(GameObject target)
     {
-        while (target.transform.localPosition != target.GetComponent<GunStats>().HipPos)
+        while (target.transform.localPosition != target.GetComponent<GunStats>().HipPos 
+            || Player_Controller.m_CameraMovement.GameCamera.fieldOfView != HipFOVcamera 
+            || Player_Controller.m_CameraMovement.GunCamera.fieldOfView != HipFOVgun)
         {
+            Player_Controller.m_CameraMovement.GameCamera.fieldOfView = Mathf.MoveTowards(Player_Controller.m_CameraMovement.GameCamera.fieldOfView, HipFOVcamera, aimSpeed * 3 * Time.deltaTime);
+            Player_Controller.m_CameraMovement.GunCamera.fieldOfView = Mathf.MoveTowards(Player_Controller.m_CameraMovement.GunCamera.fieldOfView, HipFOVgun, aimSpeed * 3 * Time.deltaTime);
             target.transform.localPosition = Vector3.MoveTowards(target.transform.localPosition, target.GetComponent<GunStats>().HipPos, aimSpeed * Time.deltaTime);
             yield return null;
         }
@@ -199,6 +217,7 @@ public class Player_Gun : MonoBehaviour {
             Bullets.Add(newBullet);
 
             //Gun Stuff
+            GunStats.GunShoot.Play();
             GunStats.PlayRecoil();
             GunStats.Shoot();
             Player_Controller.m_CameraMovement.CameraRecoil(recoil);

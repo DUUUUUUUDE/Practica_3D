@@ -54,7 +54,8 @@ public class Controller_Gallery : MonoBehaviour {
         }
         BoardScoreText.text = Score.ToString();
         playing = false;
-        ScoreText.gameObject.SetActive(false);
+        if (ScoreText)
+            ScoreText.gameObject.SetActive(false);
     }
 
     float timeToWait = 3;
