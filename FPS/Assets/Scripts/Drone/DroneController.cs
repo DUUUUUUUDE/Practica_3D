@@ -10,6 +10,10 @@ public class DroneController : MonoBehaviour {
 
     public float HearDist;
     public float HearCrouchDist;
+    public float FOV;
+    public float ViewDist;
+
+    public LayerMask CollisionLayer;
 
     public enum DroneStates
     {
@@ -27,12 +31,17 @@ public class DroneController : MonoBehaviour {
     public Animation DroneAnimation;
     public NavMeshAgent NavAgent;
 
+    public GameObject DroneHolder;
+    public Transform DronePOV;
+
+    public DroneAction Idle, Patrol, Alert, Chase, Attack, Hit;
+
     private void Start()
     {
         HP = MaxHP;
-        DroneAnimation = GetComponent<Animation>();
+        DroneAnimation = GetComponentInChildren<Animation>();
         NavAgent = GetComponent<NavMeshAgent>();
-
+        
         CurrentAction = FirstAction;
         CurrentAction.EnterAction();
     }
@@ -40,10 +49,12 @@ public class DroneController : MonoBehaviour {
     private void Update()
     {
 
-        FindPlayer();
+        if (RayCastToPlayer() && (CurrentState == DroneStates.Idle || CurrentState == DroneStates.Patrol))
+            FindPlayer();
 
         if (CurrentAction)
             CurrentAction.Action();
+
     }
 
 
@@ -65,18 +76,36 @@ public class DroneController : MonoBehaviour {
 
     #region CONDITIONS
 
-    void FindPlayer ()
+    void FindPlayer()
     {
-        if (Vector3.Distance(Player_Controller._Instace.transform.position, transform.position) > HearDist 
-            && Mathf.Abs ( Player_Controller._Instace.transform.position.y - transform.position.y) > HearDist / 2)
+        if (Vector3.Distance(Player_Controller._Instace.transform.position, transform.position) < HearDist
+            && Mathf.Abs(Player_Controller._Instace.transform.position.y - transform.position.y) < HearDist / 2)
         {
-           
+            //Alert
+            ChangeAction(Alert);
         }
         if (Player_Controller.MovingState == Player_Controller.MovingStates.Crouching
-               && Vector3.Distance(Player_Controller._Instace.transform.position, transform.position) > HearDist)
+               && Vector3.Distance(Player_Controller._Instace.transform.position, transform.position) < HearCrouchDist)
         {
-
+            //Alert
+            ChangeAction(Alert);
         }
+        Vector3 DroneToPlayer = Player_Controller._Instace.transform.position - DronePOV.transform.position;
+        if (Vector3.Angle (DroneHolder.transform.forward, DroneToPlayer) < FOV && DroneToPlayer.magnitude < ViewDist)
+        {
+            //CHASE
+        }
+    }
+
+    bool RayCastToPlayer ()
+    {
+        Ray ray = new Ray(DronePOV.transform.position, Player_Controller._Instace.transform.position - DronePOV.transform.position);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, ViewDist*2, CollisionLayer.value))
+        {
+            return true;
+        }
+        return false;
     }
 
     void ChaseDistance ()

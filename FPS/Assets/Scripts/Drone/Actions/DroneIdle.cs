@@ -7,18 +7,12 @@ public class DroneIdle : DroneAction
     public float WaitTime;
     float time;
 
-    DroneAction patrol;
-
-    protected override void Start()
-    {
-        base.Start();
-        patrol = GetComponent<DronePatrol>();
-    }
-
     public override void EnterAction()
     {
+
         time = WaitTime;
-        droneController.DroneAnimation.CrossFade("Idle", 0.2f);
+        droneController.DroneAnimation.CrossFade("Idle", 0.5f);
+        droneController.CurrentState = DroneController.DroneStates.Idle;
     }
 
     public override void Action()
@@ -26,7 +20,7 @@ public class DroneIdle : DroneAction
         time -= Time.deltaTime;
         if (time < 0)
         {
-            droneController.ChangeAction(patrol);
+            droneController.ChangeAction(droneController.Patrol);
         }
     }
 

@@ -6,13 +6,6 @@ public class DronePatrol : DroneAction
 {
     public List<Transform> PatrolPoints;
     int PointNum;
-    DroneAction Idle;
-
-    protected override void Start()
-    {
-        base.Start();
-        Idle = GetComponent<DroneIdle>();
-    }
 
     public override void EnterAction()
     {
@@ -22,14 +15,16 @@ public class DronePatrol : DroneAction
 
         droneController.NavAgent.SetDestination(PatrolPoints[PointNum].position);
 
-        droneController.DroneAnimation.CrossFade ("Move",0.2f);
+        droneController.DroneAnimation.CrossFade ("Move",0.5f);
+        droneController.CurrentState = DroneController.DroneStates.Patrol;
+
     }
 
     public override void Action()
     {
-        if (droneController.NavAgent.velocity.magnitude < (Vector3.one * 0.5f).magnitude)
+        if (droneController.NavAgent.velocity.magnitude < 0.5f)
         {
-            droneController.ChangeAction(Idle);
+            droneController.ChangeAction(droneController.Idle);
         }
     }
 
