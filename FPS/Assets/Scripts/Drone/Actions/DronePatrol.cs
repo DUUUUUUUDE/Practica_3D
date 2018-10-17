@@ -18,6 +18,8 @@ public class DronePatrol : DroneAction
         droneController.DroneAnimation.CrossFade ("Move",0.5f);
         droneController.CurrentState = DroneController.DroneStates.Patrol;
 
+        droneController.NavAgent.isStopped = false;
+
     }
 
     public override void Action()
@@ -30,7 +32,7 @@ public class DronePatrol : DroneAction
 
     public override void ExitAction()
     {
-
+        droneController.NavAgent.isStopped = true;
     }
 
 }
