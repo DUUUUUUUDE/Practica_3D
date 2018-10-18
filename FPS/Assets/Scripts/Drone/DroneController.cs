@@ -22,7 +22,8 @@ public class DroneController : MonoBehaviour {
         Alert,
         Chase,
         Attack,
-        Hit
+        Hit,
+        Dead
     };
     public DroneStates CurrentState;
     public DroneAction FirstAction;
@@ -45,15 +46,25 @@ public class DroneController : MonoBehaviour {
         CurrentAction = FirstAction;
         CurrentAction.EnterAction();
     }
-    
+
+    private void OnEnable()
+    {
+        HP = MaxHP;
+        CurrentAction = FirstAction;
+        CurrentAction.EnterAction();
+    }
+
     private void Update()
     {
+        if (CurrentState == DroneStates.Dead)
+        {
 
-        if (RayCastToPlayer() && (CurrentState == DroneStates.Idle || CurrentState == DroneStates.Patrol))
-            FindPlayer();
+            if (RayCastToPlayer() && (CurrentState == DroneStates.Idle || CurrentState == DroneStates.Patrol))
+                FindPlayer();
 
-        if (CurrentAction)
-            CurrentAction.Action();
+            if (CurrentAction)
+                CurrentAction.Action();
+        }
 
     }
 
@@ -70,8 +81,22 @@ public class DroneController : MonoBehaviour {
         HP -= dmg;
         if (HP <= 0)
         {
-            gameObject.SetActive(false);
+            KillDrone ();
         }
+    }
+
+    void KillDrone ()
+    {
+        CurrentState = DroneStates.Dead;
+        DroneAnimation.Play("Dissolve");
+        DissolveCo = StartCoroutine(KillDroneCO());
+    }
+
+    Coroutine DissolveCo;
+    IEnumerator KillDroneCO ()
+    {
+        yield return new WaitForSeconds(2);
+        gameObject.SetActive(false);
     }
 
     #region CONDITIONS
